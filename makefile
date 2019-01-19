@@ -1,4 +1,4 @@
-init: copy_config #Start container
+init: copy_config #Init project
 	@echo ""
 
 start: #Start container
@@ -33,7 +33,7 @@ install_wordpress: load_wordpress config_wordpress
 load_wordpress: #
 	@sudo docker exec -it app bash -c 'wget -c http://wordpress.org/latest.tar.gz && tar -xzvf latest.tar.gz && rsync -av wordpress/* ./public/ && rm latest.tar.gz && rm -rf wordpress/'
 
-copy_config: rewrite_wordpress_config
+copy_config:
 	@cp .env.default .env && cp sedscript.default sedscript && echo "Fill data to envs files and after run - config_wordpress"
 
 config_wordpress: rewrite_wordpress_config
